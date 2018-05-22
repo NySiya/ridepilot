@@ -6,7 +6,7 @@ class AddTrimetRegion < ActiveRecord::Migration[5.1]
 
     add_column :regions, :the_geom, :polygon, :srid => 4326
 
-    add_index :regions, :the_geom => true
+    add_index :regions, :the_geom, using: :gist
   end
 
   def self.down

@@ -23,7 +23,7 @@ class ChangeGeometryColumnsToNewFormat < ActiveRecord::Migration[5.1]
   def down
     remove_column :addresses, :the_geom
     add_column :addresses, :the_geom, :point, srid: 4326
-    add_index :addresses, :the_geom => true
+    add_index :addresses, :the_geom, using: :gist
 
     remove_column :providers, :region_nw_corner
     remove_column :providers, :region_se_corner
@@ -34,7 +34,7 @@ class ChangeGeometryColumnsToNewFormat < ActiveRecord::Migration[5.1]
 
     remove_column :regions, :the_geom
     add_column :regions, :the_geom, :polygon, srid: 4326
-    add_index :regions, :the_geom => true
+    add_index :regions, :the_geom, using: :gist
 
     Address.all.each(&:save!)
     Provider.all.each(&:save!)
