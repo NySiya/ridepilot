@@ -1,6 +1,7 @@
 class ChangeTripsResetDefaultForTripResult < ActiveRecord::Migration[5.1]
   def self.up
     change_column_default :trips, :trip_result, ""
+    change_column_default :trips, :deleted_at, ""
 
     old_codes_transposed = {
       "COMP" => "Completed", 
