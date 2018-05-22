@@ -8,7 +8,6 @@
 /.byebug_history
 /cookbooks
 /config/app_config.yml
-/config/database.yml
 /config/prod_deploy.rb
 /config/uat_deploy.rb
 /config/unicorn.production.rb
@@ -20,6 +19,5 @@
 /public/cad_avl_data_archives
 /tmp
 # Ignore application configuration
-/config/application.yml
 /railsbox
 /.byebug_history
