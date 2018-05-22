@@ -2,7 +2,7 @@
 lock "~> 3.10.2"
 
 set :application, "ridepilot"
-set :repo_url, "git@github.com:NySiya/ridepilot.git"
+set :repo_url, "git@github.com-#{fetch(:application)}:NySiya/#{fetch(:application)}.git"
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
