@@ -16,3 +16,4 @@ production:
   encoding: unicode
   database: ridepilot
   username: ridepilot
+  password: ridepilot
