@@ -12,10 +12,10 @@ test: &test
   username: ridepilot
 
 production:
-  adapter:  postgresql
+  adapter:  postgis
   encoding: unicode
   pool: 25
   timeout: 5000
   database: ridepilot
-  username: ridepilot
+  username: deployer
   password: ridepilot
