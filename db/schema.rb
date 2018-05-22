@@ -962,7 +962,7 @@ ActiveRecord::Schema.define(version: 20180508160025) do
     t.text "uncomplete_reason"
     t.string "scheduled_start_time_string", limit: 255
     t.string "scheduled_end_time_string", limit: 255
-    t.text "driver_notes"
+    # t.text "driver_notes"
     t.datetime "manifest_published_at"
     t.boolean "manifest_changed"
     t.index ["deleted_at"], name: "index_runs_on_deleted_at"

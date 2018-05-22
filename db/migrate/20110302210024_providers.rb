@@ -2,6 +2,7 @@ class Providers < ActiveRecord::Migration[5.1]
   def self.up
     create_table :providers do |t|
       t.string :name
+      t.datetime :deleted_at
     end
     create_table :roles do |t|
       t.references :user

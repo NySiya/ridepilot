@@ -8,6 +8,7 @@ class InitDb < ActiveRecord::Migration[5.1]
       t.string :state
       t.string :zip
       t.boolean :in_district
+      t.datetime :deleted_at
     end
 
     create_table :client do |t|
@@ -35,6 +36,7 @@ class InitDb < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.boolean :active
       t.boolean :paid
+      t.datetime :deleted_at
     end
 
     create_table :mobilities do |t|
@@ -43,6 +45,7 @@ class InitDb < ActiveRecord::Migration[5.1]
 
     create_table :funding_sources do |t|
       t.string :name
+      t.datetime :deleted_at
     end
 
     create_table :vehicles do |t|
@@ -53,6 +56,7 @@ class InitDb < ActiveRecord::Migration[5.1]
       t.string :license_plate
       t.string :vin
       t.string :garaged_location
+      t.datetime :deleted_at
     end
 
     create_table :runs do |t|
@@ -67,6 +71,7 @@ class InitDb < ActiveRecord::Migration[5.1]
       t.references :driver
       t.boolean :paid
       t.boolean :complete
+      t.datetime :deleted_at
     end
 
     create_table :trips do |t|
@@ -86,6 +91,7 @@ class InitDb < ActiveRecord::Migration[5.1]
       t.string :notes
       t.decimal :donation, :precision=>10, :scale=>2
       t.datetime :trip_confirmed
+      t.datetime :deleted_at
     end
   end
 
