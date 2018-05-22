@@ -2,6 +2,7 @@ class AddTrimetRegion < ActiveRecord::Migration[5.1]
   def self.up
     create_table :regions do |t|
       t.string :name
+      t.datetime :deleted_at
     end
 
     add_column :regions, :the_geom, :polygon, :srid => 4326

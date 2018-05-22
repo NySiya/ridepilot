@@ -2,7 +2,7 @@ class Defaults < ActiveRecord::Migration[5.1]
   def self.up
     change_column_default(:trips, :guest_count, 0)
     change_column_default(:trips, :attendant_count, 0)
-    change_column_default(:trips, :deleted_at, 0)
+    change_column_default(:trips, :deleted_at, '2008-10-03 22:59:52')
     change_column_default(:trips, :group_size, 0)
     change_column_default(:trips, :donation, 0)
   end

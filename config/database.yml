@@ -1,7 +1,7 @@
 development:
   adapter:  postgis
   encoding: unicode
-  database: ridepilot_development
+  database: ridepilot_new_development
   username: siyany
   schema_search_path: public
 
