@@ -11,7 +11,7 @@ class ChangeGeometryColumnsToNewFormat < ActiveRecord::Migration[5.1]
     add_column :providers, :region_se_corner, :point, geographic: true, srid: 4326
     add_column :providers, :viewport_center, :point, geographic: true, srid: 4326
 
-    add_column :regions, :deleted_at, :datetime
+    # add_column :regions, :deleted_at, :datetime
     remove_column :regions, :the_geom
     add_column :regions, :the_geom, :polygon, geographic: true, srid: 4326
     add_index :regions, :the_geom, using: :gist
@@ -33,7 +33,7 @@ class ChangeGeometryColumnsToNewFormat < ActiveRecord::Migration[5.1]
     add_column :providers, :region_se_corner, :point, srid: 4326
     add_column :providers, :viewport_center, :point, srid: 4326
 
-    remove_column :regions, :deleted_at, :datetime
+    # remove_column :regions, :deleted_at, :datetime
     remove_column :regions, :the_geom
     add_column :regions, :the_geom, :polygon, srid: 4326
     add_index :regions, :the_geom, using: :gist
