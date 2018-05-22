@@ -1,4 +1,4 @@
-class AddRepeatingTrips < ActiveRecord::Migration
+class AddRepeatingTrips < ActiveRecord::Migration[5.1]
   def self.up
     change_table :trips do |t|
       t.integer :repeating_trip_id

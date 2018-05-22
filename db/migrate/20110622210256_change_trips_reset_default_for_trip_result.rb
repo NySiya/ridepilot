@@ -1,4 +1,4 @@
-class ChangeTripsResetDefaultForTripResult < ActiveRecord::Migration
+class ChangeTripsResetDefaultForTripResult < ActiveRecord::Migration[5.1]
   def self.up
     change_column_default :trips, :trip_result, ""
 

@@ -1,4 +1,4 @@
-class AddServiceLevelToTrips < ActiveRecord::Migration
+class AddServiceLevelToTrips < ActiveRecord::Migration[5.1]
   def self.up
     add_column :trips, :service_level, :string
   end

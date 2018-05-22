@@ -1,4 +1,4 @@
-class AddInactiveFieldsToCustomers < ActiveRecord::Migration
+class AddInactiveFieldsToCustomers < ActiveRecord::Migration[5.1]
   def change
     add_column :customers, :active, :boolean
     add_column :customers, :inactivated_start_date, :date

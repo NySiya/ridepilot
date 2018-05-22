@@ -1,4 +1,4 @@
-class AddDeletedAtToLookupTables < ActiveRecord::Migration
+class AddDeletedAtToLookupTables < ActiveRecord::Migration[5.1]
   def change
     add_column :trip_purposes, :deleted_at, :datetime
     add_index :trip_purposes, :deleted_at

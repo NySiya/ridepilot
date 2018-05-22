@@ -1,4 +1,4 @@
-class AddReimbursementFeesToProviders < ActiveRecord::Migration
+class AddReimbursementFeesToProviders < ActiveRecord::Migration[5.1]
   def self.up
     add_column :providers, :oaa3b_per_ride_reimbursement_rate,               :decimal, :precision => 8, :scale => 2
     add_column :providers, :ride_connection_per_ride_reimbursement_rate,     :decimal, :precision => 8, :scale => 2

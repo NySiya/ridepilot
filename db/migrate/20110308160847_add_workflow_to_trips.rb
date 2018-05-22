@@ -1,4 +1,4 @@
-class AddWorkflowToTrips < ActiveRecord::Migration
+class AddWorkflowToTrips < ActiveRecord::Migration[5.1]
   def self.up
     change_table :trips do |t|
       t.date :called_back_at

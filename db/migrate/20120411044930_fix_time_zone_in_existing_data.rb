@@ -1,4 +1,4 @@
-class FixTimeZoneInExistingData < ActiveRecord::Migration
+class FixTimeZoneInExistingData < ActiveRecord::Migration[5.1]
   def self.up
     execute <<-SQL
       UPDATE addresses

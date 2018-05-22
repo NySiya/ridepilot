@@ -1,4 +1,4 @@
-class CreateDevicePools < ActiveRecord::Migration
+class CreateDevicePools < ActiveRecord::Migration[5.1]
   def self.up
     create_table :device_pools do |t|
       t.integer :provider_id

@@ -1,4 +1,4 @@
-class CreateLookupTables < ActiveRecord::Migration
+class CreateLookupTables < ActiveRecord::Migration[5.1]
   def change
     create_table :lookup_tables do |t|
       t.string :caption

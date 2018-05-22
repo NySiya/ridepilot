@@ -1,4 +1,4 @@
-class CreateProviderReports < ActiveRecord::Migration
+class CreateProviderReports < ActiveRecord::Migration[5.1]
   def change
     create_table :provider_reports do |t|
       t.references :provider, index: true

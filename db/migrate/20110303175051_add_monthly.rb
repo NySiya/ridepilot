@@ -1,4 +1,4 @@
-class AddMonthly < ActiveRecord::Migration
+class AddMonthly < ActiveRecord::Migration[5.1]
   def self.up
     create_table :monthlies do |t|
       t.date :start_date

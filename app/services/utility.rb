@@ -1,10 +1,10 @@
 class Utility
   def parse_date(time_param)
-    return if !time_param.present? 
+    return if !time_param.present?
 
     # this is to parse calendar params
     # will be deprecated after new calendar gets in
-    if time_param.is_a?(Date) 
+    if time_param.is_a?(Date)
       time = time_param
     elsif time_param.is_a?(DateTime)
       time = time_param.to_date
@@ -19,10 +19,10 @@ class Utility
 
   def get_provider_bounds(provider)
     if provider && provider.region_nw_corner && provider.region_se_corner
-      min_lon = provider.region_nw_corner.x 
-      max_lon = provider.region_se_corner.x 
-      min_lat = provider.region_se_corner.y 
-      max_lat = provider.region_nw_corner.y 
+      min_lon = provider.region_nw_corner.x
+      max_lon = provider.region_se_corner.x
+      min_lat = provider.region_se_corner.y
+      max_lat = provider.region_nw_corner.y
     elsif GOOGLE_MAP_DEFAULTS && GOOGLE_MAP_DEFAULTS[:bounds]
       min_lon = GOOGLE_MAP_DEFAULTS[:bounds][:west]
       max_lon = GOOGLE_MAP_DEFAULTS[:bounds][:east]
@@ -39,9 +39,11 @@ class Utility
   end
 
   def phone_number_valid?(phone_number)
-    us_phony = Phony['1'] # US phone validation
+    # us_phony = Phony['1'] # Khmer phone validation
+    # norm_number = us_phony.normalize(phone_number.to_s)
+    # us_phony.plausible? norm_number
 
-    norm_number = us_phony.normalize(phone_number.to_s)
-    us_phony.plausible? norm_number
+    norm_number = Phony.normalize(phone_number.to_s)
+    Phony.plausible? norm_number
   end
 end

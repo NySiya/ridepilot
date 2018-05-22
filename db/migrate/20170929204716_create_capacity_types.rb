@@ -1,4 +1,4 @@
-class CreateCapacityTypes < ActiveRecord::Migration
+class CreateCapacityTypes < ActiveRecord::Migration[5.1]
   def change
     create_table :capacity_types do |t|
       t.string :name

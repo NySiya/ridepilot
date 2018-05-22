@@ -1,4 +1,4 @@
-class CreateTravelTime < ActiveRecord::Migration
+class CreateTravelTime < ActiveRecord::Migration[5.1]
   def self.up
     create_table "travel_time_estimates", :id=>false do |t|
       t.integer :from_address_id, :references=>:addresses

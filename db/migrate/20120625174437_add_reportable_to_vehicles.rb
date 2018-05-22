@@ -1,4 +1,4 @@
-class AddReportableToVehicles < ActiveRecord::Migration
+class AddReportableToVehicles < ActiveRecord::Migration[5.1]
   def self.up
     add_column :vehicles, :reportable, :boolean
     Vehicle.update_all :reportable => true

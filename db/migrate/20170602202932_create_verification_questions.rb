@@ -1,4 +1,4 @@
-class CreateVerificationQuestions < ActiveRecord::Migration
+class CreateVerificationQuestions < ActiveRecord::Migration[5.1]
   def change
     create_table :verification_questions do |t|
       t.references :user, index: true

@@ -1,4 +1,4 @@
-class FundingSourceShownTo < ActiveRecord::Migration
+class FundingSourceShownTo < ActiveRecord::Migration[5.1]
   def self.up
     create_table :funding_source_visibilities do |t|
       t.integer :funding_source_id

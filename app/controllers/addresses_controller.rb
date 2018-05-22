@@ -24,7 +24,7 @@ class AddressesController < ApplicationController
 
     arel_table = Address.arel_table
 
-    if params[:customer_id].present? 
+    if params[:customer_id].present?
       customer = Customer.find_by_id(params[:customer_id])
       base_arel = (arel_table[:customer_id].in(customer.id).and(arel_table[:type].eq('CustomerCommonAddress')))
       if customer
@@ -71,7 +71,7 @@ class AddressesController < ApplicationController
     for param in ['name', 'building_name', 'address', 'city', 'state', 'zip', 'phone_number', 'in_district', 'trip_purpose_id', 'notes']
       address_params[param] = params[prefix][param]
     end
-    
+
     address_params[:the_geom]    = the_geom if the_geom
 
     if params[:address_id].present?
@@ -130,7 +130,7 @@ class AddressesController < ApplicationController
     elsif !params[:address_lat].blank? && !params[:address_lon].blank?
       Address.compute_geom(params[:address_lat], params[:address_lon])
     else
-      nil 
+      nil
     end
   end
 end

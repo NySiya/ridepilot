@@ -1,4 +1,4 @@
-class CreateWeekdayAssignments < ActiveRecord::Migration
+class CreateWeekdayAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :weekday_assignments do |t|
       t.references :repeating_trip, index: true

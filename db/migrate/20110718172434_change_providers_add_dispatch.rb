@@ -1,4 +1,4 @@
-class ChangeProvidersAddDispatch < ActiveRecord::Migration
+class ChangeProvidersAddDispatch < ActiveRecord::Migration[5.1]
   def self.up
     add_column :providers, :dispatch, :boolean
   end

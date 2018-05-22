@@ -1,4 +1,4 @@
-class CallBackStamps < ActiveRecord::Migration
+class CallBackStamps < ActiveRecord::Migration[5.1]
   def self.up
     change_table :trips do |t|
       t.integer :called_back_by 

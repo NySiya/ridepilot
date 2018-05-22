@@ -1,4 +1,4 @@
-class CreateTravelTrainings < ActiveRecord::Migration
+class CreateTravelTrainings < ActiveRecord::Migration[5.1]
   def change
     create_table :travel_trainings do |t|
       t.belongs_to :customer, index: true

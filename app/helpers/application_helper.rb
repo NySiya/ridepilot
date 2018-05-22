@@ -1,4 +1,4 @@
-module ApplicationHelper  
+module ApplicationHelper
   def current_provider
     current_user.try(:current_provider)
   end
@@ -10,7 +10,7 @@ module ApplicationHelper
   def show_dispatch?
     current_user && current_provider && current_provider.dispatch?
   end
-  
+
   def show_scheduling?
     current_user && current_provider.scheduling?
   end
@@ -18,11 +18,11 @@ module ApplicationHelper
   def is_admin_or_system_admin?
     current_user.present? && (current_user.admin? || current_user.super_admin?)
   end
-  
+
   def new_device_pool_members_options(members)
     options_for_select [["",""]] + members.map { |d| [d.name, d.id] }
   end
-  
+
   def display_trip_result(trip_result)
     trip_result.try(:name) || "Pending"
   end
@@ -34,7 +34,7 @@ module ApplicationHelper
   def format_simple_full_datetime(time)
     time.strftime "%B %d, %Y %I:%M %p" if time
   end
-  
+
   def format_time_for_listing(time)
     time.strftime('%l:%M%P') if time
   end
@@ -50,7 +50,7 @@ module ApplicationHelper
   def format_date(time, format = 'us')
     time.strftime('%m/%d/%Y') if time
   end
-  
+
   def format_date_for_daily_manifest(date)
     date.strftime('%A, %v') if date
   end
@@ -68,11 +68,11 @@ module ApplicationHelper
       link_to trippable.trips.present? ? translate_helper("merge") : translate_helper("delete"), trippable, :class => 'delete'
     end
   end
-  
+
   def can_delete?(trippable)
     trippable.trips.blank? && can?( :destroy, trippable )
   end
-  
+
   def format_newlines(text)
     return text.gsub("\n", "<br/>")
   end
@@ -163,11 +163,11 @@ module ApplicationHelper
   def format_phone_number(phone_number)
     return "" if phone_number.blank?
 
-    us_phony = Phony['1'] # US phone validation
-
+    us_phony = Phony['855'] # KH phone validation
     norm_number = us_phony.normalize(phone_number.to_s)
 
-    number_to_phone norm_number, area_code: true
+    # number_to_phone norm_number, area_code: true
+    norm_number.phony_formatted(format: :international)
   end
 
   def show_provider_setting_alert(provider, section)
@@ -206,7 +206,7 @@ module ApplicationHelper
         class_name = "overdue-danger"
         warning_msg = "Inactive for the run date."
       end
-      
+
       tips = []
 
       if vehicle.vehicle_compliances.legal.overdue.any?
@@ -230,7 +230,7 @@ module ApplicationHelper
       end
 
       overdue_msg = "Overdue: " + tips.join(', ') if tips.any?
-    
+
     end
 
     tips = warning_msg ? warning_msg + " " + overdue_msg.to_s : overdue_msg.to_s
@@ -238,17 +238,17 @@ module ApplicationHelper
       class_name: class_name,
       tips: tips.blank? ? nil : tips
     }
-  end 
+  end
 
   def get_driver_warnings(driver, run = nil)
     class_name = ''
     warning_msg = ''
     overdue_msg = ''
-    
-    unless driver 
+
+    unless driver
       class_name = "overdue-danger"
       warning_msg = "No driver assigned."
-    else 
+    else
       if run && run.date
         if !driver.active_for_date?(run.date)
           class_name = "overdue-danger"
@@ -258,7 +258,7 @@ module ApplicationHelper
             class_name = "overdue-danger"
             warning_msg += "Unavailable for the whole run time range. "
           end
-        elsif 
+        elsif
           unless driver.available?(run.date)
             class_name = "overdue-danger"
             warning_msg += "Unavailable for the run time. "
@@ -267,7 +267,7 @@ module ApplicationHelper
       end
 
       tips = []
-      
+
       if driver.driver_compliances.legal.overdue.any?
         tips << "legal requirement"
         class_name = 'overdue-danger'
@@ -286,14 +286,14 @@ module ApplicationHelper
       class_name: class_name,
       tips: tips.blank? ? nil : tips
     }
-  end 
+  end
 
   def check_if_verify_client_code(customer)
     customer && !customer.code.blank? && session["client_code_#{customer.id}"] != '1'
   end
 
   def format_driver_emergency_contact(contact)
-    return "" unless contact 
+    return "" unless contact
 
     parts = []
     name_part = "#{contact.name}"

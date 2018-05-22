@@ -1,4 +1,4 @@
-class CreateDriverRequirementTemplates < ActiveRecord::Migration
+class CreateDriverRequirementTemplates < ActiveRecord::Migration[5.1]
   def change
     create_table :driver_requirement_templates do |t|
       t.references :provider, index: true

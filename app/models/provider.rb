@@ -2,9 +2,9 @@ class Provider < ApplicationRecord
   include PublicActivity::Common
   include Operatable
   has_paper_trail
-  
+
   acts_as_paranoid # soft delete
-  
+
   serialize :fields_required_for_run_completion, Array
 
   after_initialize :set_defaults
@@ -36,7 +36,7 @@ class Provider < ApplicationRecord
   accepts_nested_attributes_for :mailing_address, update_only: true
 
   has_attached_file :logo, :styles => { :small => "150x150>" }
-  
+
   REIMBURSEMENT_ATTRIBUTES = [
     :oaa3b_per_ride_reimbursement_rate,
     :ride_connection_per_ride_reimbursement_rate,
@@ -56,10 +56,10 @@ class Provider < ApplicationRecord
   # default load & unload time in minutes
   DEFAULT_PASSENGER_LOAD_MIN = 5
   DEFAULT_PASSENGER_UNLOAD_MIN = 5
-  
+
   validates :name, :uniqueness => { :case_sensitive => false, conditions: -> { where(deleted_at: nil)} }, :length => { :minimum => 2 }
   normalize_attribute :name, :with => [ :strip ]
-  
+
   validates_numericality_of :oaa3b_per_ride_reimbursement_rate,               :greater_than => 0, :allow_blank => true
   validates_numericality_of :ride_connection_per_ride_reimbursement_rate,     :greater_than => 0, :allow_blank => true
   validates_numericality_of :trimet_per_ride_reimbursement_rate,              :greater_than => 0, :allow_blank => true
@@ -70,17 +70,17 @@ class Provider < ApplicationRecord
   validates_numericality_of :stf_taxi_per_mile_ambulatory_reimbursement_rate, :greater_than => 0, :allow_blank => true
   validates_numericality_of :stf_taxi_per_mile_wheelchair_reimbursement_rate, :greater_than => 0, :allow_blank => true
   validates_attachment      :logo,
-    size: {:less_than => 2.gigabytes}, 
+    size: {:less_than => 2.gigabytes},
     # prevent content-type spoofing:
     content_type: {:content_type => /\Aimage/},
     file_name: {:matches => [/png\Z/, /gif\Z/, /jpe?g\Z/], allow_blank: true}
   # How many days in advance to create subscription trips/runs
-  validates_numericality_of :advance_day_scheduling, :greater_than => 0, :allow_blank => true 
+  validates_numericality_of :advance_day_scheduling, :greater_than => 0, :allow_blank => true
   validate  :valid_phone_number
 
   validates_numericality_of :driver_availability_min_hour
   validates_numericality_of :driver_availability_max_hour, :greater_than => :driver_availability_min_hour
-  
+
   after_initialize :init
 
   scope :active, -> { where("inactivated_date is NULL") }
@@ -106,20 +106,20 @@ class Provider < ApplicationRecord
   end
 
   def inactivate!(reason)
-    self.inactivated_date = Date.today 
+    self.inactivated_date = Date.today
     self.inactivated_reason = reason
     self.save(validate: false)
   end
 
   def reactivate!
-    self.inactivated_date = nil 
+    self.inactivated_date = nil
     self.inactivated_reason = nil
     self.save(validate: false)
   end
 
   def check_age_eligible(age)
     if age.present? && (eligible_age || DEFAULT_ELIGIBLE_AGE) <= age
-      true 
+      true
     else
       false
     end
@@ -128,7 +128,7 @@ class Provider < ApplicationRecord
   def get_advance_day_scheduling
     advance_day_scheduling || DEFAULT_ADVANCE_DAY_SCHEDULING
   end
-  
+
   # Returns true if the passed date falls within the advance scheduling window
   def scheduler_window_covers?(date)
     date < (Date.today + get_advance_day_scheduling.days)
@@ -138,12 +138,12 @@ class Provider < ApplicationRecord
   def has_admin?
     roles.admin_and_aboves.any?
   end
-  
+
   # points at the document with the description "Approved Vendor List"
   def vendor_list
     documents.find_by(description: "Approved Vendor List")
   end
-  
+
   # pass a file object and will replace the vendor_list with that file
   def update_vendor_list(file)
     old_vendor_list = vendor_list
@@ -157,7 +157,7 @@ class Provider < ApplicationRecord
       return false
     end
   end
-  
+
   # removes the vendor list associated with the provider
   def remove_vendor_list
     documents.delete(vendor_list)
@@ -178,6 +178,7 @@ class Provider < ApplicationRecord
 
   def valid_phone_number
     util = Utility.new
+
     if phone_number.present?
       errors.add(:phone_number, 'is invalid') unless util.phone_number_valid?(phone_number)
     end

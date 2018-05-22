@@ -1,4 +1,4 @@
-class AddViewportPositionToProvider < ActiveRecord::Migration
+class AddViewportPositionToProvider < ActiveRecord::Migration[5.1]
   def self.up
     add_column :providers, :viewport_center, :point
     add_column :providers, :viewport_zoom, :integer

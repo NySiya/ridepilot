@@ -1,4 +1,4 @@
-class ChangeAddressesAddInactiveFlag < ActiveRecord::Migration
+class ChangeAddressesAddInactiveFlag < ActiveRecord::Migration[5.1]
   def self.up
     add_column :addresses, :inactive, :boolean, :default => false
     

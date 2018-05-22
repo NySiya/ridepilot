@@ -1,4 +1,4 @@
-class AddComplimentsComplaints < ActiveRecord::Migration
+class AddComplimentsComplaints < ActiveRecord::Migration[5.1]
   def self.up
     change_table :monthlies do |t|
       t.integer :complaints

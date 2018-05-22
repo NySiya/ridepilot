@@ -1,4 +1,4 @@
-class InitDb < ActiveRecord::Migration
+class InitDb < ActiveRecord::Migration[5.1]
   def self.up
     create_table :addresses do |t|
       t.string :name

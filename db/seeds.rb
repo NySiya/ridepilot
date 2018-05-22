@@ -19,7 +19,8 @@ ApplicationRecord.transaction do
     puts "Creating first User..."
     email = Rails.application.secrets.system_admin_email
     username = Rails.application.secrets.system_admin_username || email.split('@').first
-    password = Rails.application.secrets.system_admin_password
+    password = 'Siya01051995'
+    # password = Rails.application.secrets.system_admin_password
     first_name = Rails.application.secrets.system_admin_first_name || "Admin"
     last_name = Rails.application.secrets.system_admin_last_name || "User"
 

@@ -29,7 +29,7 @@ module Ridepilot
       end
     end
   end
-  
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -38,7 +38,7 @@ module Ridepilot
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rails -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Mountain Time (US & Canada)'
+    # config.time_zone = 'Mountain Time (US & Canada)'
 
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = :en
@@ -70,14 +70,14 @@ module Ridepilot
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
       g.view_specs false
       g.helper_specs false
-      
+
       # It is suggested to leave these all enabled
       # g.request_specs false
       # g.routing_specs false
       # g.controller_specs false
       # g.model_specs false
     end
-    
+
     # Use Redis as the cache_store if it's available
     if ENV["REDISCLOUD_URL"]
       config.cache_store = :redis_store, ENV["REDISCLOUD_URL"], { expires_in: 90.minutes }

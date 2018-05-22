@@ -1,4 +1,4 @@
-class CreateProviderEthnicities < ActiveRecord::Migration
+class CreateProviderEthnicities < ActiveRecord::Migration[5.1]
   def self.up
     create_table :provider_ethnicities do |t|
       t.integer :provider_id

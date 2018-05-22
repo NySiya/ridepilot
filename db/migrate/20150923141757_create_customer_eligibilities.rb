@@ -1,4 +1,4 @@
-class CreateCustomerEligibilities < ActiveRecord::Migration
+class CreateCustomerEligibilities < ActiveRecord::Migration[5.1]
   def change
     create_table :customer_eligibilities do |t|
       t.references :customer, index: true

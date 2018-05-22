@@ -1,4 +1,4 @@
-class CreateCustomerAdaQuestions < ActiveRecord::Migration
+class CreateCustomerAdaQuestions < ActiveRecord::Migration[5.1]
   def change
     create_table :customer_ada_questions do |t|
       t.references :customer, index: true

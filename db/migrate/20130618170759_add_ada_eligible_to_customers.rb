@@ -1,4 +1,4 @@
-class AddAdaEligibleToCustomers < ActiveRecord::Migration
+class AddAdaEligibleToCustomers < ActiveRecord::Migration[5.1]
   def self.up
     add_column :customers, :ada_eligible, :boolean
   end

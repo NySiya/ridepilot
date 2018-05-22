@@ -1,6 +1,6 @@
 class DriversController < ApplicationController
   load_and_authorize_resource except: [:create, :delete_photo, :inactivate, :reactivate, :availability]
-  
+
   # Load documents through their associated parent
   load_and_authorize_resource :document, through: [:driver]
 
@@ -40,7 +40,7 @@ class DriversController < ApplicationController
     elsif is_geocoded_address_blank
       if @driver.emergency_contact
         prev_emergency_contact_address = @driver.emergency_contact.geocoded_address
-        @driver.emergency_contact.geocoded_address_id = nil 
+        @driver.emergency_contact.geocoded_address_id = nil
       end
       new_attrs[:emergency_contact_attributes] = new_attrs[:emergency_contact_attributes].except(:geocoded_address_attributes)
     end
@@ -52,12 +52,12 @@ class DriversController < ApplicationController
     if @driver.emergency_contact && @driver.emergency_contact.geocoded_address.present?
       @driver.emergency_contact.geocoded_address.the_geom = Address.compute_geom(params[:lat], params[:lon])
     end
-    
+
     if !@driver.is_all_valid?(current_provider_id)
       prep_edit
       render action: :edit
     else
-      begin      
+      begin
         Driver.transaction do
           @driver.save!
           prev_alt_address.destroy if is_alt_address_blank && prev_alt_address.present?
@@ -74,10 +74,11 @@ class DriversController < ApplicationController
   end
 
   def create
-    @driver = Driver.new 
+    @driver = Driver.new
     authorize! :create, Driver
-    
+
     new_attrs = driver_params
+
     is_alt_address_blank = check_blank_alt_address
     if is_alt_address_blank
       new_attrs = new_attrs.except(:alt_address_attributes)
@@ -94,7 +95,7 @@ class DriversController < ApplicationController
     @driver.attributes = new_attrs
     @driver.alt_address = nil if is_alt_address_blank
     if is_emergency_contact_blank
-      @driver.emergency_contact = nil 
+      @driver.emergency_contact = nil
     else
       if is_geocoded_address_blank
         @driver.emergency_contact.geocoded_address = nil
@@ -140,7 +141,7 @@ class DriversController < ApplicationController
     @driver = Driver.find_by_id(params[:id])
 
     authorize! :update, @driver
-    
+
     prev_active_text = @driver.active_status_text
     prev_reason = @driver.active_status_changed_reason
 
@@ -156,7 +157,7 @@ class DriversController < ApplicationController
         end
       end
     else
-      @driver.active_status_changed_reason = nil  
+      @driver.active_status_changed_reason = nil
     end
 
     if @driver.changed?
@@ -194,7 +195,7 @@ class DriversController < ApplicationController
     else
       Date.today
     end
-        
+
   end
 
   def daily_availability_forecast
@@ -203,12 +204,12 @@ class DriversController < ApplicationController
   end
 
   def assign_runs
-    if @driver 
+    if @driver
       run = Run.find_by_id(params[:run_id])
-      if run 
+      if run
         # first unassign other conflicting runs if any
         unless params[:conflicting_run_ids].blank?
-          conflicting_runs = Run.where(id: params[:conflicting_run_ids].split(',')) 
+          conflicting_runs = Run.where(id: params[:conflicting_run_ids].split(','))
           conflicting_runs.update_all(driver_id: nil)
         end
 
@@ -228,26 +229,26 @@ class DriversController < ApplicationController
   end
 
   private
-  
+
   def prep_edit(readonly: false)
     @readonly = readonly
-    
+
     @available_users = @driver.provider.users - User.drivers(@driver.provider)
     @available_users << @driver.user if @driver.user
-    @available_users = @available_users.sort_by(&:name_with_username) 
-    
+    @available_users = @available_users.sort_by(&:name_with_username)
+
     @driver.address ||= @driver.build_address(provider_id: current_provider_id)
-    @driver.alt_address ||= @driver.build_alt_address(provider_id: current_provider_id) 
-    
+    @driver.alt_address ||= @driver.build_alt_address(provider_id: current_provider_id)
+
     unless readonly
       @driver.build_photo unless @driver.photo.present?
     end
   end
-  
+
   def driver_params
     params.require(:driver).permit(
-      :paid, 
-      :email, 
+      :paid,
+      :email,
       :user_id,
       :phone_number,
       :alt_phone_number,
@@ -326,7 +327,7 @@ class DriversController < ApplicationController
         end
       end
     end if contact_params
-    
+
     is_blank
   end
 
@@ -336,7 +337,7 @@ class DriversController < ApplicationController
 
     unless contact_params.blank?
       geocoded_address_params = contact_params[:geocoded_address_attributes]
-      
+
       geocoded_address_params.keys.each do |key|
         next if key.to_s == 'provider_id'
         unless geocoded_address_params[key].blank?

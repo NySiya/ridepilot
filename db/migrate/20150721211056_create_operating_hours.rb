@@ -1,4 +1,4 @@
-class CreateOperatingHours < ActiveRecord::Migration
+class CreateOperatingHours < ActiveRecord::Migration[5.1]
   def change
     create_table :operating_hours do |t|
       t.references :driver, index: true

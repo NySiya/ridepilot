@@ -1,4 +1,4 @@
-class CreateVehicleMaintenanceCompliances < ActiveRecord::Migration
+class CreateVehicleMaintenanceCompliances < ActiveRecord::Migration[5.1]
   def change
     create_table :vehicle_maintenance_compliances do |t|
       t.references :vehicle, index: true

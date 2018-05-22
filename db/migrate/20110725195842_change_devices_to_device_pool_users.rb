@@ -1,4 +1,4 @@
-class ChangeDevicesToDevicePoolUsers < ActiveRecord::Migration
+class ChangeDevicesToDevicePoolUsers < ActiveRecord::Migration[5.1]
   def self.up
     rename_table :devices, :device_pool_users
     

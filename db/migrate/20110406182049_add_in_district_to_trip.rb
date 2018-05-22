@@ -1,4 +1,4 @@
-class AddInDistrictToTrip < ActiveRecord::Migration
+class AddInDistrictToTrip < ActiveRecord::Migration[5.1]
   def self.up
     change_table :trips do |t|
       t.boolean :in_district
